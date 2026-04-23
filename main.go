@@ -12,15 +12,16 @@ import (
 )
 
 type apiConfig struct {
-	db               database.Client
-	jwtSecret        string
-	platform         string
-	filepathRoot     string
-	assetsRoot       string
-	s3Bucket         string
-	s3Region         string
-	s3CfDistribution string
-	port             string
+	db					database.Client
+	jwtSecret			string
+	platform			string
+	filepathRoot		string
+	assetsRoot			string
+	s3Bucket			string
+	s3Region			string
+	s3CfDistribution	string
+	port				string
+	s3CLient			*s3.Client
 }
 
 type thumbnail struct {
@@ -92,6 +93,8 @@ func main() {
 		s3CfDistribution: s3CfDistribution,
 		port:             port,
 	}
+
+	client, err := config.LoadDefaultConfig
 
 	err = cfg.ensureAssetsDir()
 	if err != nil {

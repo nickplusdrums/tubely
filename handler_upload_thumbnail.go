@@ -84,9 +84,10 @@ func (cfg *apiConfig) handlerUploadThumbnail(w http.ResponseWriter, r *http.Requ
 	
 	key := make([]byte, 32)
 	rand.Read(key)
+	encoded := base64.RawURLEncoding.EncodeToString(key)
 
 
-	fileName := fmt.Sprintf("%v.%v", videoID, ext)
+	fileName := fmt.Sprintf("%v.%v", encoded, ext)
 	
 	videoMD, err := cfg.db.GetVideo(videoID)
 	if err != nil {
